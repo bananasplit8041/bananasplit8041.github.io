@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brunnerando.at - Pizza ohne Reue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fef3c7; }
+        .pizza-spin { animation: spin 20s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .topping-bounce { animation: bounce 0.5s ease-out; }
+        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <header class="bg-red-600 text-white py-6 shadow-xl mb-8 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="text-4xl">🍕</div>
+                <h1 class="text-3xl font-black tracking-tighter">BRUNNERANDO.AT</h1>
+            </div>
+            <p class="italic font-medium text-red-100 mt-2 md:mt-0 text-center md:text-right">
+                "Schneller als der Hunger erlaubt!"
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-4xl">
+        
+        <div class="bg-white rounded-3xl shadow-2xl p-6 mb-8 text-center overflow-hidden border-4 border-yellow-400">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Deine Meisterwerk-Vorschau</h2>
+            <div class="relative w-64 h-64 mx-auto mb-6 flex items-center justify-center">
+                <!-- Die Basis-Pizza -->
+                <div id="pizza-base" class="w-full h-full bg-yellow-500 rounded-full border-8 border-yellow-700 shadow-inner pizza-spin relative">
+                    <div class="absolute inset-4 bg-red-500 rounded-full opacity-80"></div> <!-- Tomatensauce -->
+                </div>
+                <!-- Topping-Layer -->
+                <div id="topping-preview" class="absolute inset-0 pointer-events-none grid grid-cols-3 gap-2 p-8">
+                    <!-- Hier werden Icons dynamisch eingefügt -->
+                </div>
+            </div>
+            <p id="funny-quote" class="text-gray-500 italic">Wähle Zutaten, bevor du verhungerst!</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+            <button onclick="toggleTopping('mais', '🌽')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-mais">
+                <div class="text-3xl mb-2">🌽</div>
+                <div class="font-bold">Mais</div>
+                <div class="text-xs text-gray-400">Goldstückchen</div>
+            </button>
+            <button onclick="toggleTopping('paprika', '🫑')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-paprika">
+                <div class="text-3xl mb-2">🫑</div>
+                <div class="font-bold">Paprika</div>
+                <div class="text-xs text-gray-400">Bunt & Gesund</div>
+            </button>
+            <button onclick="toggleTopping('salami', '🥓')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-salami">
+                <div class="text-3xl mb-2">🥓</div>
+                <div class="font-bold">Salami</div>
+                <div class="text-xs text-gray-400">Klassiker!</div>
+            </button>
+            <button onclick="toggleTopping('tomaten', '🍅')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-tomaten">
+                <div class="text-3xl mb-2">🍅</div>
+                <div class="font-bold">Tomaten</div>
+                <div class="text-xs text-gray-400">Frisch gepflückt</div>
+            </button>
+            <button onclick="toggleTopping('pecorino', '🧀')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-pecorino">
+                <div class="text-3xl mb-2">🧀</div>
+                <div class="font-bold">Pecorino</div>
+                <div class="text-xs text-gray-400">Für die Profis</div>
+            </button>
+            <button onclick="toggleTopping('zwiebeln', '🧅')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-zwiebeln">
+                <div class="text-3xl mb-2">🧅</div>
+                <div class="font-bold">Zwiebeln</div>
+                <div class="text-xs text-gray-400">Zum Heulen gut</div>
+            </button>
+        </div>
+
+        <section class="bg-white rounded-3xl shadow-2xl p-8 border-t-8 border-red-600">
+            <h3 class="text-2xl font-black mb-6 flex items-center gap-2">
+                🚀 Ab die Post!
+            </h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Wer ist der Glückliche?</label>
+                    <input type="text" id="cust-name" placeholder="Name (oder cooler Deckname)" class="w-full p-4 rounded-xl bg-gray-100 border-2 border-transparent focus:border-red-500 outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Wo wohnt dein Hunger?</label>
+                    <input type="text" id="cust-addr" placeholder="Straße, Hausnummer, Planet" class="w-full p-4 rounded-xl bg-gray-100 border-2 border-transparent focus:border-red-500 outline-none transition-all">
+                </div>
+                <button onclick="sendOrder()" id="order-submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-5 rounded-2xl shadow-lg transform hover:-translate-y-1 transition-all text-xl mt-4">
+                    PIZZA JETZT BESTELLEN!
+                </button>
+            </div>
+        </section>
+
+        <!-- Erfolgsmeldung -->
+        <div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 max-w-sm text-center">
+                <div class="text-6xl mb-4">🎉</div>
+                <h2 class="text-2xl font-bold mb-2">Bestellung raus!</h2>
+                <p class="text-gray-600 mb-6" id="modal-msg">Dein Brunnerando-Kurier zieht sich gerade die Schuhe an.</p>
+                <button onclick="location.reload()" class="bg-green-500 text-white px-6 py-2 rounded-full font-bold">Noch eine!</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-12 text-center text-gray-500 text-sm">
+        &copy; 2024 Brunnerando.at - Wir wissen, was du heute Abend isst.
+    </footer>
+
+    <script>
+        let selectedToppings = [];
+        const phone = "+436641294784";
+        const apikey = "553312";
+
+        const quotes = [
+            "Gute Wahl! Die Salami hat heute besonders gute Laune.",
+            "Pecorino? Du bist ein Kenner!",
+            "Zwiebeln? Hoffentlich hast du kein Date heute Abend.",
+            "Mais auf Pizza... gewagt, aber wir lieben Risiko!",
+            "Fast so gut wie bei Oma (nur schneller).",
+            "Eine Pizza, sie alle zu knechten..."
+        ];
+
+        function toggleTopping(id, emoji) {
+            const index = selectedToppings.indexOf(id);
+            const btn = document.getElementById('btn-' + id);
+            
+            if (index === -1) {
+                selectedToppings.push(id);
+                btn.classList.add('border-red-500', 'bg-red-50');
+                addToPreview(id, emoji);
+            } else {
+                selectedToppings.splice(index, 1);
+                btn.classList.remove('border-red-500', 'bg-red-50');
+                removeFromPreview(id);
+            }
+            
+            updateQuote();
+        }
+
+        function addToPreview(id, emoji) {
+            const preview = document.getElementById('topping-preview');
+            const span = document.createElement('span');
+            span.id = 'preview-' + id;
+            span.className = 'text-2xl topping-bounce';
+            span.innerText = emoji;
+            preview.appendChild(span);
+        }
+
+        function removeFromPreview(id) {
+            const el = document.getElementById('preview-' + id);
+            if (el) el.remove();
+        }
+
+        function updateQuote() {
+            const q = document.getElementById('funny-quote');
+            if (selectedToppings.length === 0) {
+                q.innerText = "Wähle Zutaten, bevor du verhungerst!";
+            } else {
+                q.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+            }
+        }
+
+        async function sendOrder() {
+            const name = document.getElementById('cust-name').value;
+            const addr = document.getElementById('cust-addr').value;
+            const btn = document.getElementById('order-submit');
+
+            if (!name || !addr || selectedToppings.length === 0) {
+                const errorBox = document.createElement('div');
+                errorBox.className = "fixed top-5 left-1/2 -translate-x-1/2 bg-yellow-400 text-black px-6 py-3 rounded-full font-bold shadow-2xl z-[200]";
+                errorBox.innerText = "Halt! Name, Adresse und Zutaten fehlen!";
+                document.body.appendChild(errorBox);
+                setTimeout(() => errorBox.remove(), 3000);
+                return;
+            }
+
+            btn.innerText = "SIGNAL WIRD GESENDET...";
+            btn.disabled = true;
+
+            // Nachricht für Signal formatieren
+            const toppingList = selectedToppings.map(t => t.toUpperCase()).join(', ');
+            const message = `🍕 NEUE BESTELLUNG! \n\n👤 Kunde: ${name}\n📍 Ort: ${addr}\n topping: ${toppingList}\n\nBrunnerando.at - Schnell & Lecker!`;
+            
+            // API Call URL zusammenbauen
+            const apiUrl = `https://signal.callmebot.com/signal/send.php?phone=${phone}&apikey=${apikey}&text=${encodeURIComponent(message)}`;
+
+            try {
+                // Hinweis: mode 'no-cors' wird oft benötigt, da Browser Cross-Origin Anfragen blockieren könnten, 
+                // die API den Request aber trotzdem verarbeitet.
+                await fetch(apiUrl, {
+                    method: 'GET',
+                    mode: 'no-cors'
+                });
+
+                console.log("Order processed via Signal API");
+
+                // Erfolg anzeigen
+                document.getElementById('success-modal').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error("API Fehler:", error);
+                btn.innerText = "FEHLER! NOCHMAL VERSUCHEN?";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
