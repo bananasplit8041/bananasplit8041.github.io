@@ -32,6 +32,12 @@
         
         <div class="bg-white rounded-3xl shadow-2xl p-6 mb-8 text-center overflow-hidden border-4 border-yellow-400">
             <h2 class="text-2xl font-bold mb-4 text-gray-800">Deine Meisterwerk-Vorschau</h2>
+            
+            <!-- Hinweis auf obligatorische Zutaten -->
+            <div class="mb-4 inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-bold animate-pulse">
+                🍅 Tomatensauce & 🧀 Mozzarella sind IMMER dabei!
+            </div>
+
             <div class="relative w-64 h-64 mx-auto mb-6 flex items-center justify-center">
                 <!-- Die Basis-Pizza -->
                 <div id="pizza-base" class="w-full h-full bg-yellow-500 rounded-full border-8 border-yellow-700 shadow-inner pizza-spin relative">
@@ -61,10 +67,20 @@
                 <div class="font-bold">Salami</div>
                 <div class="text-xs text-gray-400">Klassiker!</div>
             </button>
-            <button onclick="toggleTopping('tomaten', '🍅')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-tomaten">
-                <div class="text-3xl mb-2">🍅</div>
-                <div class="font-bold">Tomaten</div>
-                <div class="text-xs text-gray-400">Frisch gepflückt</div>
+            <button onclick="toggleTopping('scharfe_salami', '🌶️')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-scharfe_salami">
+                <div class="text-3xl mb-2">🌶️</div>
+                <div class="font-bold">Scharfe Salami</div>
+                <div class="text-xs text-gray-400">Brennt zweimal!</div>
+            </button>
+            <button onclick="toggleTopping('getr_tomaten', '☀️')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-getr_tomaten">
+                <div class="text-3xl mb-2">☀️</div>
+                <div class="font-bold">Getr. Tomaten</div>
+                <div class="text-xs text-gray-400">Sonne pur</div>
+            </button>
+            <button onclick="toggleTopping('oliven', '🫒')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-oliven">
+                <div class="text-3xl mb-2">🫒</div>
+                <div class="font-bold">Oliven</div>
+                <div class="text-xs text-gray-400">Einfach O-lala</div>
             </button>
             <button onclick="toggleTopping('pecorino', '🧀')" class="topping-btn bg-white p-4 rounded-2xl shadow-md border-2 border-transparent hover:border-red-500 transition-all active:scale-95" id="btn-pecorino">
                 <div class="text-3xl mb-2">🧀</div>
